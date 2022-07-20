@@ -16,27 +16,36 @@ import {
     useColorScheme, View,
 } from 'react-native';
 
-import {IS_IOS} from "./src/utils/functions";
 import {useDispatch} from "react-redux";
 import AppNavigation from "./src/navigation";
-import {AppDispatch} from "./src/redux/store";
-import {appLoaded} from "./src/redux/appState";
+import {appLoaded, appTheme} from "./src/redux/appState";
+import {fetchRepos} from "./src/redux/repos";
+
+const seconds =2000
 
 const App = () => {
     const isMounted = useRef(false);
+    const theme = useColorScheme()
+
+    console.log('theme>>>>>>',theme)
 
   const dispatch=useDispatch()
-
-    const seconds =2000
 
     useEffect(() => {
         if (!isMounted.current) {
             setTimeout(() => {
                 dispatch(appLoaded());
             }, seconds);
+
         }
         isMounted.current = true;
     }, [dispatch]);
+
+    useEffect(()=>{
+        dispatch(appTheme(theme))
+    },[theme])
+
+
 
 
   return (
@@ -50,6 +59,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignSelf: 'stretch',
+        backgroundColor: 'white'
     }
 });
 

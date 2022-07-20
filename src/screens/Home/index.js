@@ -1,44 +1,39 @@
-import React,{useEffect} from "react";
-import {FlatList, StyleSheet, Text, View, ActivityIndicator} from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 
-import {normalizeFontSize, verticalScale} from "../../utils/functions";
-import {COLORS} from "../../utils/theme";
+import { COLORS } from "../../utils/theme";
+import { useDispatch } from "react-redux";
+import { fetchRepos } from "../../redux/repos";
+import { fetchReposWitDate } from "../../redux/filteredRepos";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { TabBar } from "./Components/TopBar";
+import { ExploreScreen } from "../Explore";
+import { Repositories } from "../Repositories/indeex";
+import { Header } from "./Components/Header";
 
+const Tab = createMaterialTopTabNavigator();
+export const HomeScreen = () => {
+  const dispatch = useDispatch();
 
-
-export const HomeScreen = () =>{
-
-
-    return(
-        <View style={styles.container}>
-
-
-        </View>
-    )
-}
+  useEffect(() => {
+    dispatch(fetchRepos());
+    dispatch(fetchReposWitDate({}));
+  }, [dispatch]);
+  return (
+    <View style={styles.container}>
+      <Header />
+      <Tab.Navigator tabBar={(props) => <TabBar {...props} />}>
+        <Tab.Screen name="Explore" component={ExploreScreen} />
+        <Tab.Screen name="Repositories" component={Repositories} />
+      </Tab.Navigator>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: COLORS.WHITE
-    },
-    title: {
-     fontSize: normalizeFontSize(18),
-     textAlign: 'center',
-     fontWeight: 'bold'
-    },
-    header: {
-     height: verticalScale(45),
-     alignSelf: 'stretch',
-     borderBottomWidth: verticalScale(0.5),
-     borderBottomColor: COLORS.GRAY_II,
-     alignItems: 'center',
-     justifyContent: 'center',
-    },
-    contentContainerStyle:{
-        marginTop: verticalScale(15),
-        paddingBottom: verticalScale(30)
-    }
-})
+    alignSelf: "stretch",
+    backgroundColor: COLORS.WHITE,
+  },
+});

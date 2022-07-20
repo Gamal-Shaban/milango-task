@@ -7,13 +7,11 @@ import { navigationRef } from '../utils/navigation';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { COLORS } from '../utils/theme';
 
-
 const AppNavigation = () => {
   const { isLoaded } = useSelector((state) => ({
     isLoaded: state?.appState?.isLoaded,
   }));
 
-  console.log({isLoaded})
   return (
     <NavigationContainer ref={navigationRef}>
       {isLoaded ? (

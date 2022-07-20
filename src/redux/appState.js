@@ -8,10 +8,12 @@ export const appStateSlice = createSlice({
         appLoaded: (state, action) => {
             state.isLoaded = true
         },
+        appTheme: (state, action) => {
+            state.appTheme = action.payload
+        },
     },
 })
 
-// Action creators are generated for each case reducer function
-export const { appLoaded } = appStateSlice.actions
+export const { appLoaded, appTheme } = appStateSlice.actions
 
 export default appStateSlice.reducer

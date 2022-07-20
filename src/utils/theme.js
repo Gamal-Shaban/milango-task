@@ -5,6 +5,7 @@ export const COLORS = {
   WHITE: '#FFFFFF',
   GRAY_II: '#C9C9C9',
   GRAY_III: '#F2F2F2',
+  MAIN_COLOR: '#2b1190'
 };
 
 // add icons here
@@ -17,4 +18,6 @@ export const IMAGES = {
   LOADING_SPLASH: require('../assets/images/loading.gif'),
   back: require('../assets/images/arrow.png'),
   avatar: require('../assets/images/avatar.jpg'),
+  logo: require('../assets/images/logo.png'),
+  searchIcon: require('../assets/images/searchIcon.png'),
 };
