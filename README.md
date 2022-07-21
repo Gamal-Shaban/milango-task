@@ -27,22 +27,14 @@ GitHub provides a public search endpoint which you can use for fetching the most
 ## UI Design
 [XD Files](https://drive.google.com/file/d/1v3hMX5awOcYY3eULlXMrWUWAYqWaBbJy/view?usp=sharing).
 
-## Solution evaluation
-
-Your solution will be evaluated corresponding to these points:
-
-- The solution should have a CLI application.
-- Automated tests.
-- Scalability and performance.
-- Concise and clean code.
-- Include a readme file for how to run and use the solution.
-
-NOTE: This challenge is aimed to senior developers, so expected to hit a high point of technicality.
-
 ## Steps to run project
 - clone this repo
 - yarn install
 - npx react-native start
 - npx react-native run-ios
+
+## Vedio for app
+
+(https://streamable.com/hxo52s)
 
 
