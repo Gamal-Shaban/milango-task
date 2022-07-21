@@ -6,7 +6,7 @@ import { horizontalScale, verticalScale } from '../../utils/functions';
 const Index = () => {
   return (
     <View style={styles.container}>
-      <Image source={IMAGES.LOADING_SPLASH} />
+      <Image source={IMAGES.loadingSplash} />
 
     </View>
   );

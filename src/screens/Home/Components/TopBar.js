@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import {horizontalScale, normalizeFontSize, verticalScale} from "../../../utils/functions";
 import {COLORS} from "../../../utils/theme";
+import AppText from "../../../components/AppText";
 
 export const TabBar = ({ state, descriptors, navigation }) => {
   return (
@@ -50,7 +51,7 @@ export const TabBar = ({ state, descriptors, navigation }) => {
                 : null,
             ]}
           >
-            <Text style={[styles.title, isFocused ? {color: COLORS.MAIN_COLOR, }: null]} >{label}</Text>
+            <AppText style={[styles.title, isFocused ? {color: COLORS.MAIN_COLOR, }: null]} >{label}</AppText>
           </TouchableOpacity>
         );
       })}

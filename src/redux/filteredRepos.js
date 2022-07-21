@@ -15,7 +15,7 @@ export const fetchReposWitDate = createAsyncThunk(
       const response = await axios.get(
         `https://api.github.com/search/repositories?q=created:${
           date || today
-        }&sort=stars&order=desc&page=${page || 1}}`
+        }&sort=stars&order=desc&page=${page || 1}}&per_page=100`
       );
       // dispatch(setFetchedRepoPage(page));
       return { ...response.data, ...page };
