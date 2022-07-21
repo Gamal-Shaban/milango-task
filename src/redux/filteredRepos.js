@@ -60,9 +60,11 @@ export const filteredReposSlice = createSlice({
       if (state.language === "Any") {
         state.viewReposWithSort = [...action.payload.items];
       } else {
-        state.viewReposWithSort = state.payload?.items?.filter(
-          (i) => i.language.toLowerCase() === state.language.toLowerCase()
-        );
+        state.viewReposWithSort = [...action.payload.items]?.filter((i) => {
+          console.log("kldkdkdkdk", i.language);
+
+          return i.language?.toLowerCase() === state.language?.toLowerCase();
+        });
       }
     },
     [fetchReposWitDate.rejected]: (state, action) => {

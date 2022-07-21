@@ -75,8 +75,9 @@ const styles = StyleSheet.create({
     fontSize: normalizeFontSize(18),
     color: COLORS.MAIN_COLOR,
     fontWeight: "bold",
-    marginLeft: horizontalScale(5),
+    marginLeft: horizontalScale(10),
     lineHeight: verticalScale(24),
+    marginRight: horizontalScale(20),
   },
   description: {
     fontSize: normalizeFontSize(15),

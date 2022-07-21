@@ -17,7 +17,7 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(fetchRepos());
-    // dispatch(fetchReposWitDate({}));
+    dispatch(fetchReposWitDate({}));
   }, [dispatch]);
   return (
     <View style={styles.container}>
