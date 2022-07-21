@@ -33,7 +33,7 @@ GitHub provides a public search endpoint which you can use for fetching the most
 - npx react-native start
 - npx react-native run-ios
 
-## Vedio for app
+## Video for app
 
 (https://streamable.com/hxo52s)
 
