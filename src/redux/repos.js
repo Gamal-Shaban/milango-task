@@ -5,6 +5,7 @@ import {
 } from "@reduxjs/toolkit";
 import storeInitialState from "./storeInitialState";
 import axios from "axios";
+import {setFetchedRepoData} from "./filteredRepos";
 
 export const fetchRepos = createAsyncThunk(
   "reposData/fetchRepos",
@@ -14,6 +15,7 @@ export const fetchRepos = createAsyncThunk(
         `https://api.github.com/search/repositories?q=created:%3E2019-01-10&sort=stars&order=desc&per_page=100`
       );
       dispatch(setFetchedRepoPageInExplore(page))
+        dispatch(setFetchedRepoData(response.data))
       return response.data ;
     } catch (err) {
       if (!err.response) {
@@ -29,7 +31,6 @@ export const reposSlice = createSlice({
   name: "reposData",
   initialState: storeInitialState.reposData,
   reducers: {
-
     setFetchedRepoPageInExplore: (state, action) => {
       state.page = action.payload;
     },

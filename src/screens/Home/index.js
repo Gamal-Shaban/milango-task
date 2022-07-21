@@ -8,7 +8,7 @@ import { fetchReposWitDate } from "../../redux/filteredRepos";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { TabBar } from "./Components/TopBar";
 import { ExploreScreen } from "../Explore";
-import { Repositories } from "../Repositories/indeex";
+import { Repositories } from "../Repositories";
 import { Header } from "./Components/Header";
 
 const Tab = createMaterialTopTabNavigator();
@@ -17,7 +17,7 @@ export const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(fetchRepos());
-    dispatch(fetchReposWitDate({}));
+    // dispatch(fetchReposWitDate({}));
   }, [dispatch]);
   return (
     <View style={styles.container}>

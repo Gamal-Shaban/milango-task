@@ -9,7 +9,7 @@ import moment from "moment";
 
 export const fetchReposWitDate = createAsyncThunk(
   "reposData/fetchRepos",
-  async ({ date, page }) => {
+  async ({ date, page }, { dispatch }) => {
     try {
       const today = moment().format("YYYY-MM-DD");
       const response = await axios.get(
@@ -17,8 +17,8 @@ export const fetchReposWitDate = createAsyncThunk(
           date || today
         }&sort=stars&order=desc&page=${page || 1}}&per_page=100`
       );
-      // dispatch(setFetchedRepoPage(page));
-      return { ...response.data, ...page };
+      dispatch(setFetchedRepoPage(page));
+      return response.data;
     } catch (err) {
       if (!err.response) {
         throw err;
@@ -36,33 +36,42 @@ export const filteredReposSlice = createSlice({
       state.page = action.payload;
     },
     sortByLang: (state, action) => {
-      state.viewReposWithSort = state.payload.filter(
-        (i) => i.language === action.payload
-      );
+      state.language = action.payload.toLowerCase();
+      if (action.payload === "Any") {
+        state.viewReposWithSort = state.dayReposData;
+      } else {
+        state.viewReposWithSort = state.dayReposData?.filter(
+          (i) => i.language?.toLowerCase() === action.payload?.toLowerCase()
+        );
+      }
     },
-    extraReducers: {
-      [fetchReposWitDate.pending]: (state) => {
-        state.isLoading = true;
-      },
-      [fetchReposWitDate.fulfilled]: (state, action) => {
-        state.isLoading = false;
-        state.page = action.payload.page;
-        state.dayReposData = [...action.payload];
-        if (state.language === "any") {
-          state.viewReposWithSort = [...action.payload];
-        } else {
-          state.viewReposWithSort = state.payload.filter(
-            (i) => i.language === state.language
-          );
-        }
-      },
-      [fetchReposWitDate.rejected]: (state) => {
-        state.isLoading = false;
-      },
+    setFetchedRepoData: (state, action) => {
+      state.viewReposWithSort = [...action.payload.items];
+      state.dayReposData = [...action.payload.items];
+    },
+  },
+  extraReducers: {
+    [fetchReposWitDate.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [fetchReposWitDate.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.dayReposData = [...action.payload.items];
+      if (state.language === "Any") {
+        state.viewReposWithSort = [...action.payload.items];
+      } else {
+        state.viewReposWithSort = state.payload?.items?.filter(
+          (i) => i.language.toLowerCase() === state.language.toLowerCase()
+        );
+      }
+    },
+    [fetchReposWitDate.rejected]: (state, action) => {
+      state.isLoading = false;
     },
   },
 });
 
-export const { sortByLang, setFetchedRepoPage } = filteredReposSlice.actions;
+export const { sortByLang, setFetchedRepoPage, setFetchedRepoData } =
+  filteredReposSlice.actions;
 
 export default filteredReposSlice.reducer;

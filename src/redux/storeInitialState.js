@@ -15,7 +15,7 @@ const initialStates = {
     isLoading: true,
     dayReposData: [],
     viewReposWithSort: [],
-    language: "any",
+    language: "Any",
     page: 1,
   },
 };

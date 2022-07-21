@@ -8,59 +8,47 @@
  * @format
  */
 
-import React, { useEffect,useRef} from 'react';
-import {
-    SafeAreaView,
-    StatusBar,
-    StyleSheet, Text,
-    useColorScheme, View,
-} from 'react-native';
+import React, { useEffect, useRef } from "react";
+import { StyleSheet, useColorScheme, View } from "react-native";
 
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import AppNavigation from "./src/navigation";
-import {appLoaded, appTheme} from "./src/redux/appState";
-import {fetchRepos} from "./src/redux/repos";
+import { appLoaded, appTheme } from "./src/redux/appState";
 
-const seconds =2000
+const seconds = 2000;
 
 const App = () => {
-    const isMounted = useRef(false);
-    const theme = useColorScheme()
+  const isMounted = useRef(false);
+  const theme = useColorScheme();
 
-    console.log('theme>>>>>>',theme)
+  const dispatch = useDispatch();
 
-  const dispatch=useDispatch()
+  useEffect(() => {
+    if (!isMounted.current) {
+      setTimeout(() => {
+        dispatch(appLoaded());
+      }, seconds);
+    }
+    isMounted.current = true;
+  }, [dispatch]);
 
-    useEffect(() => {
-        if (!isMounted.current) {
-            setTimeout(() => {
-                dispatch(appLoaded());
-            }, seconds);
-
-        }
-        isMounted.current = true;
-    }, [dispatch]);
-
-    useEffect(()=>{
-        dispatch(appTheme(theme))
-    },[theme])
-
-
-
+  useEffect(() => {
+    dispatch(appTheme(theme));
+  }, [theme]);
 
   return (
-        <View style={styles.container}>
-            <AppNavigation />
-        </View>
+    <View style={styles.container}>
+      <AppNavigation />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignSelf: 'stretch',
-        backgroundColor: 'white'
-    }
+  container: {
+    flex: 1,
+    alignSelf: "stretch",
+    backgroundColor: "white",
+  },
 });
 
 export default App;

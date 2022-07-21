@@ -7,27 +7,10 @@ import {
 } from "../../../utils/functions";
 import { COLORS, IMAGES } from "../../../utils/theme";
 import AppText from "../../../components/AppText";
-import moment from "moment";
 
-export const CardItem = ({ item }) => {
+export const RepoCardItem = ({ item }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.topView}>
-        <AppText style={styles.trendingText}>Trending repository</AppText>
-        <View style={{ flex: 1 }} />
-        <Image
-          source={IMAGES.star}
-          style={styles.star}
-          resizeMode={"contain"}
-        />
-        <AppText style={[styles.startText]}>Star</AppText>
-        <View style={styles.countStarView}>
-          <AppText style={styles.countStarText}>
-            {`${item?.stargazers_count}`}
-          </AppText>
-        </View>
-      </View>
-
       <View style={styles.nameContainer}>
         <Image
           source={IMAGES.path7}
@@ -42,10 +25,13 @@ export const CardItem = ({ item }) => {
       </AppText>
       <View style={{ flex: 1 }} />
       <View style={styles.bottomView}>
-        <AppText style={styles.updateTomeText}>
-          {`Updated ${moment(item.updated_at).fromNow()}`}
-        </AppText>
         <AppText style={styles.updateTomeText}>{item.language}</AppText>
+
+        <Image source={IMAGES.star} style={styles.star} />
+        <AppText style={styles.starCount}>{item?.stargazers_count}</AppText>
+
+        <Image source={IMAGES.union} style={styles.star} />
+        <AppText style={styles.starCount}>{item?.forks_count}</AppText>
       </View>
     </View>
   );
@@ -62,22 +48,6 @@ const styles = StyleSheet.create({
     width: horizontalScale(340),
     padding: verticalScale(15),
     paddingBottom: 0,
-  },
-  topView: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  trendingText: {
-    fontSize: normalizeFontSize(15),
-  },
-  star: {
-    width: verticalScale(20),
-    height: verticalScale(25),
-    marginHorizontal: horizontalScale(8),
-  },
-  startText: {
-    fontSize: normalizeFontSize(15),
-    fontWeight: "bold",
   },
   countStarView: {
     height: verticalScale(30),
@@ -126,7 +96,17 @@ const styles = StyleSheet.create({
   updateTomeText: {
     fontSize: normalizeFontSize(14),
     textAlign: "left",
-    flex: 1,
     fontWeight: "bold",
+    marginRight: horizontalScale(25),
+  },
+  star: {
+    height: verticalScale(15),
+    width: verticalScale(15),
+    marginRight: horizontalScale(5),
+  },
+  starCount: {
+    fontSize: normalizeFontSize(14),
+    fontWeight: "bold",
+    marginRight: horizontalScale(25),
   },
 });

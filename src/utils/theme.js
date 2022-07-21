@@ -1,5 +1,3 @@
-import { Dimensions } from 'react-native';
-
 export const COLORS = {
   BLACK: '#1E1F20',
   WHITE: '#FFFFFF',
@@ -9,9 +7,7 @@ export const COLORS = {
 };
 
 // add icons here
-export const ICONS = {
-
-};
+export const ICONS = {};
 
 // Add Images Here
 export const IMAGES = {
@@ -23,4 +19,6 @@ export const IMAGES = {
   chevronIcon: require('../assets/images/Path4.png'),
   star: require('../assets/images/star.png'),
   path7: require('../assets/images/Path7.png'),
+  union: require('../assets/images/Union.png'),
+  close: require('../assets/images/closeIcon.png'),
 };
