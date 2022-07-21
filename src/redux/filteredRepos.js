@@ -8,7 +8,7 @@ import axios from "axios";
 import moment from "moment";
 
 export const fetchReposWitDate = createAsyncThunk(
-  "reposData/fetchRepos",
+  "reposData/fetchReposWitDate",
   async ({ date, page }, { dispatch }) => {
     try {
       const today = moment().format("YYYY-MM-DD");
@@ -18,6 +18,7 @@ export const fetchReposWitDate = createAsyncThunk(
         }&sort=stars&order=desc&page=${page || 1}}&per_page=100`
       );
       dispatch(setFetchedRepoPage(page));
+      console.log("response.data>>>", response.data);
       return response.data;
     } catch (err) {
       if (!err.response) {
@@ -45,10 +46,6 @@ export const filteredReposSlice = createSlice({
         );
       }
     },
-    setFetchedRepoData: (state, action) => {
-      state.viewReposWithSort = [...action.payload.items];
-      state.dayReposData = [...action.payload.items];
-    },
   },
   extraReducers: {
     [fetchReposWitDate.pending]: (state) => {
@@ -56,13 +53,11 @@ export const filteredReposSlice = createSlice({
     },
     [fetchReposWitDate.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.dayReposData = [...action.payload.items];
+      state.dayReposData = action.payload.items;
       if (state.language === "Any") {
-        state.viewReposWithSort = [...action.payload.items];
+        state.viewReposWithSort = action.payload.items;
       } else {
-        state.viewReposWithSort = [...action.payload.items]?.filter((i) => {
-          console.log("kldkdkdkdk", i.language);
-
+        state.viewReposWithSort = action.payload.items?.filter((i) => {
           return i.language?.toLowerCase() === state.language?.toLowerCase();
         });
       }
