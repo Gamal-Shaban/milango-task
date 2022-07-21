@@ -39,6 +39,3 @@ Your solution will be evaluated corresponding to these points:
 
 NOTE: This challenge is aimed to senior developers, so expected to hit a high point of technicality.
 
-Good Luck;
-
-Milango Team
